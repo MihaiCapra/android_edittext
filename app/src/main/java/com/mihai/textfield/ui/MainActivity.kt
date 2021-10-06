@@ -8,18 +8,19 @@ import androidx.databinding.DataBindingUtil
 import com.mihai.textfield.R
 import com.mihai.textfield.constants.Params
 import com.mihai.textfield.core.BaseActivity
+import com.mihai.textfield.core.countWords
 import com.mihai.textfield.databinding.ActivityMainBinding
 import com.mihai.textfield.viewmodel.MainActivityViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
     private val mainActivityViewModel: MainActivityViewModel by viewModels()
+    private lateinit var mainActivityBinding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
 
-        val mainActivityBinding: ActivityMainBinding = DataBindingUtil.setContentView(
+        mainActivityBinding = DataBindingUtil.setContentView(
             this,
             R.layout.activity_main
         )
@@ -35,17 +36,19 @@ class MainActivity : BaseActivity() {
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
 
-        textInput.addTextChangedListener {
-            it?.let {
-                mainActivityViewModel.apply {
-                    text.value = it.toString()
-                    wordCount.value = it.toString().countWords()
+        mainActivityBinding.apply {
+            textInput.addTextChangedListener {
+                it?.let {
+                    mainActivityViewModel.apply {
+                        text.value = it.toString()
+                        wordCount.value = it.toString().countWords()
+                    }
                 }
             }
-        }
 
-        insertBtn.setOnClickListener {
-            textInput.append(getString(R.string.default_paragraph))
+            insertBtn.setOnClickListener {
+                textInput.append(getString(R.string.default_paragraph))
+            }
         }
     }
 
