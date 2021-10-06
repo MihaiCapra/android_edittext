@@ -1,69 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:background="@color/off_white"
-    tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textFieldContainer"
-        style="@style/Theme.DefaultTextField"
+    <data>
+
+        <variable
+            name="mainViewModel"
+            type="com.mihai.textfield.viewmodel.MainActivityViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/padding_default"
-        android:layout_marginTop="@dimen/padding_24"
-        android:layout_marginEnd="@dimen/padding_default"
-        android:layout_marginBottom="@dimen/padding_24"
-        app:layout_constraintBottom_toTopOf="@+id/insertBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        android:layout_height="match_parent"
+        tools:background="@color/off_white"
+        tools:context=".MainActivity">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textInputTxt"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textFieldContainer"
+            style="@style/Theme.DefaultTextField"
             android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/padding_default"
+            android:layout_marginTop="@dimen/padding_24"
+            android:layout_marginEnd="@dimen/padding_default"
+            android:layout_marginBottom="@dimen/padding_24"
+            app:layout_constraintBottom_toTopOf="@+id/insertBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/text"
+                android:inputType="textMultiLine"
+                android:minHeight="@dimen/min_height"
+                android:text="@{mainViewModel.text}"
+                tools:text="Some Text"
+                tools:textColor="@color/black_500" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/counterText"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="@string/text"
-            android:inputType="textMultiLine"
-            android:minHeight="@dimen/min_height"
-            tools:text="Some Text"
-            tools:textColor="@color/black_500" />
+            android:textAlignment="viewEnd"
+            android:textColor="@color/black_500"
+            android:text="@{mainViewModel.wordCount}"
+            android:textSize="@dimen/text_16"
+            app:layout_constraintEnd_toEndOf="@+id/textFieldContainer"
+            app:layout_constraintTop_toBottomOf="@+id/textFieldContainer"
+            tools:text="999" />
 
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/counterText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/padding_8"
-        android:layout_marginBottom="@dimen/padding_8"
-        android:textAlignment="viewEnd"
-        android:textColor="@color/black_500"
-        android:textSize="@dimen/text_16"
-        app:layout_constraintBottom_toBottomOf="@+id/textFieldContainer"
-        app:layout_constraintEnd_toEndOf="@+id/textFieldContainer"
-        tools:text="999" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/insertBtn"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/min_height"
-        android:layout_marginStart="@dimen/padding_32"
-        android:layout_marginEnd="@dimen/padding_32"
-        android:layout_marginBottom="@dimen/padding_32"
-        android:background="@drawable/default_button"
-        android:backgroundTint="@null"
-        android:text="@string/insert"
-        android:textAlignment="center"
-        android:textAllCaps="true"
-        android:textAppearance="@color/off_white"
-        android:textColor="@color/off_white"
-        android:textSize="@dimen/text_20"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/insertBtn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/min_height"
+            android:layout_marginStart="@dimen/padding_32"
+            android:layout_marginEnd="@dimen/padding_32"
+            android:layout_marginBottom="@dimen/padding_32"
+            android:background="@drawable/default_button"
+            android:backgroundTint="@null"
+            android:text="@string/insert"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textAppearance="@color/off_white"
+            android:textColor="@color/off_white"
+            android:textSize="@dimen/text_20"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,13 +1,68 @@
 package com.mihai.textfield
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.widget.addTextChangedListener
+import androidx.databinding.DataBindingUtil
+import com.mihai.textfield.constants.Params
+import com.mihai.textfield.databinding.ActivityMainBinding
+import com.mihai.textfield.viewmodel.MainActivityViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+    private val mainActivityViewModel: MainActivityViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
-        setContentView(R.layout.activity_main)
+
+        val mainActivityBinding: ActivityMainBinding = DataBindingUtil.setContentView(
+            this,
+            R.layout.activity_main
+        )
+        mainActivityBinding.lifecycleOwner = this
+        mainActivityBinding.mainViewModel = mainActivityViewModel
+
+        savedInstanceState?.let {
+            mainActivityViewModel.text.value = it.getString(Params.SAVED_STATE_TEXT)
+            mainActivityViewModel.wordCount.value = it.getString(Params.SAVED_STATE_WORD_COUNT)
+        }
+    }
+
+    override fun onPostCreate(savedInstanceState: Bundle?) {
+        super.onPostCreate(savedInstanceState)
+
+        textInput.addTextChangedListener {
+             it?.let {
+                mainActivityViewModel.apply {
+                    text.value = it.toString()
+                    wordCount.value = it.toString().countWords()
+                }
+            }
+        }
+
+        insertBtn.setOnClickListener {
+            textInput.append(getString(R.string.default_paragraph))
+        }
+    }
+
+    private fun String.countWords(): String = this.split("\\s+".toRegex()).size.toString()
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.apply {
+            putString(Params.SAVED_STATE_TEXT, mainActivityViewModel.text.value)
+            putString(Params.SAVED_STATE_WORD_COUNT, mainActivityViewModel.wordCount.value)
+        }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        mainActivityViewModel.apply {
+            text.removeObservers(this@MainActivity)
+            wordCount.removeObservers(this@MainActivity)
+        }
     }
 }
