@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/black_200</item>
         <item name="colorPrimaryVariant">@color/black_700</item>
         <item name="colorOnPrimary">@color/off_white</item>
+        <item name="colorAccent">@color/blue</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/yellow_500</item>
         <item name="colorSecondaryVariant">@color/yellow_500</item>
@@ -29,6 +30,7 @@
         <item name="colorControlActivated">@color/black_500</item>
         <item name="boxCornerRadiusTopStart">@dimen/radius_4</item>
         <item name="boxCornerRadiusTopEnd">@dimen/radius_4</item>
+        <item name="android:paddingBottom">@dimen/padding_default</item>
         <item name="boxCornerRadiusBottomStart">@dimen/radius_4</item>
         <item name="boxCornerRadiusBottomEnd">@dimen/radius_4</item>
         <item name="backgroundColor">@color/black_200</item>

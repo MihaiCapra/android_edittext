@@ -9,26 +9,43 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textFieldContainer"
-        style="@style/TextField"
+        style="@style/Theme.DefaultTextField"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/padding_default"
         android:layout_marginTop="@dimen/padding_24"
         android:layout_marginEnd="@dimen/padding_default"
+        android:layout_marginBottom="@dimen/padding_24"
+        app:layout_constraintBottom_toTopOf="@+id/insertBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/textField"
+            android:id="@+id/textInputTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/text"
             android:inputType="textMultiLine"
             android:minHeight="@dimen/min_height"
-            tools:text="Some Text" />
+            tools:text="Some Text"
+            tools:textColor="@color/black_500" />
 
     </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/counterText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/padding_8"
+        android:layout_marginBottom="@dimen/padding_8"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/black_500"
+        android:textSize="@dimen/text_16"
+        app:layout_constraintBottom_toBottomOf="@+id/textFieldContainer"
+        app:layout_constraintEnd_toEndOf="@+id/textFieldContainer"
+        tools:text="999" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/insertBtn"
@@ -42,6 +59,7 @@
         android:text="@string/insert"
         android:textAlignment="center"
         android:textAllCaps="true"
+        android:textAppearance="@color/off_white"
         android:textColor="@color/off_white"
         android:textSize="@dimen/text_20"
         android:textStyle="bold"
