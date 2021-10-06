@@ -7,4 +7,5 @@
     <color name="black_500">#FF1d1d1b</color>
     <color name="black_700">#FF0b0b0b</color>
     <color name="off_white">#FFfafafa</color>
+    <color name="off_white_85">#85fafafa</color>
 </resources>

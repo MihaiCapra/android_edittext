@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TextField</string>
+    <string name="text">Text</string>
+    <string name="insert">Insert</string>
 </resources>
