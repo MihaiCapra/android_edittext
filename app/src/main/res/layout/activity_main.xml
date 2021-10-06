@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.mihai.textfield.ui.binding.BindingAdapterKt" />
+
         <variable
             name="mainViewModel"
             type="com.mihai.textfield.viewmodel.MainActivityViewModel" />
@@ -15,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:background="@color/off_white"
-        tools:context=".MainActivity">
+        tools:context=".ui.MainActivity">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/textFieldContainer"
@@ -26,6 +28,7 @@
             android:layout_marginTop="@dimen/padding_24"
             android:layout_marginEnd="@dimen/padding_default"
             android:layout_marginBottom="@dimen/padding_24"
+            android:hint="@{mainViewModel.wordCount}"
             app:layout_constraintBottom_toTopOf="@+id/insertBtn"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -36,7 +39,6 @@
                 android:id="@+id/textInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/text"
                 android:inputType="textMultiLine"
                 android:minHeight="@dimen/min_height"
                 android:text="@{mainViewModel.text}"
@@ -44,18 +46,6 @@
                 tools:textColor="@color/black_500" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/counterText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="viewEnd"
-            android:textColor="@color/black_500"
-            android:text="@{mainViewModel.wordCount}"
-            android:textSize="@dimen/text_16"
-            app:layout_constraintEnd_toEndOf="@+id/textFieldContainer"
-            app:layout_constraintTop_toBottomOf="@+id/textFieldContainer"
-            tools:text="999" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/insertBtn"

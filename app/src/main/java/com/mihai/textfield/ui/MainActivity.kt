@@ -1,17 +1,18 @@
-package com.mihai.textfield
+package com.mihai.textfield.ui
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
+import com.mihai.textfield.R
 import com.mihai.textfield.constants.Params
+import com.mihai.textfield.core.BaseActivity
 import com.mihai.textfield.databinding.ActivityMainBinding
 import com.mihai.textfield.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     private val mainActivityViewModel: MainActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         super.onPostCreate(savedInstanceState)
 
         textInput.addTextChangedListener {
-             it?.let {
+            it?.let {
                 mainActivityViewModel.apply {
                     text.value = it.toString()
                     wordCount.value = it.toString().countWords()
@@ -47,8 +48,6 @@ class MainActivity : AppCompatActivity() {
             textInput.append(getString(R.string.default_paragraph))
         }
     }
-
-    private fun String.countWords(): String = this.split("\\s+".toRegex()).size.toString()
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
